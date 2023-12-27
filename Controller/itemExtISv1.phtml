@@ -1,0 +1,31 @@
+<?php require('Template/header.html') ?>
+
+<form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
+     <table class="table table-hover">
+    <thead>
+        <tr>
+        <th>Auction ID</th><th>Auction Start</th><th>Item ID </th><th>Posting User </th><th> Item</th><th>Description</th> <th>Photo</th>
+        </tr>
+    </thead>
+     <tbody>
+        <?php foreach ($view->itemExtendedDataSet as $itemExtendedData) {
+            echo '<tr> <td>' . $itemExtendedData->getAuctionID() . '</td> <td>' . $itemExtendedData->getAuctionStart() . '</td> <td>' . $itemExtendedData->getItemID() . '</td> <td>' . $itemExtendedData->getPostingUser() . '</td> <td>' . $itemExtendedData->getItemTitle() . '</td> <td>' . $itemExtendedData->getDescription() . '</td> <td>' . $itemExtendedData->getProductImage() . '</td></tr>';
+      }
+      ?>
+    </tbody>
+  </table>
+</form>
+
+<?php require('Template/footer.html') ?>
+
+
+
+
+
+
+
+
+
+
+
+

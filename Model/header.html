@@ -1,0 +1,99 @@
+<script>
+    function lightbg_clr() {
+        $('#qu').val("");
+        $('#textbox-clr').text("");
+        $('#search-layer').css({"width":"auto","height":"auto"});
+        $('#livesearch').css({"display":"none"});
+        $("#qu").focus();
+    };
+
+    function fx(str)
+    {
+        var s1=document.getElementById("qu").value;
+        var xmlhttp;
+        if (str.length==0) {
+            document.getElementById("livesearch").innerHTML="";
+            document.getElementById("livesearch").style.border="0px";
+            document.getElementById("search-layer").style.width="auto";
+            document.getElementById("search-layer").style.height="auto";
+            document.getElementById("livesearch").style.display="block";
+            $('#textbox-clr').text("");
+            return;
+        }
+        if (window.XMLHttpRequest)
+        {// code for IE7+, Firefox, Chrome, Opera, Safari
+            xmlhttp=new XMLHttpRequest();
+        }
+        else
+        {// code for IE6, IE5
+            xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+        }
+        xmlhttp.onreadystatechange=function()
+        {
+            if (xmlhttp.readyState==4 && xmlhttp.status==200)
+            {
+                document.getElementById("livesearch").innerHTML=xmlhttp.responseText;
+                document.getElementById("search-layer").style.width="100%";
+                document.getElementById("search-layer").style.height="100%";
+                document.getElementById("livesearch").style.display="block";
+                $('#textbox-clr').text("X");
+            }
+        }
+        xmlhttp.open("GET","call_ajax.php?n="+s1,true);
+        xmlhttp.send();
+    }
+</script>
+
+
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <!-- Bootstrap core CSS -->
+    <link href="../css/bootstrap.css" rel="stylesheet">
+    <!-- Bootstrap theme -->
+    <link href="../css/bootstrap.theme.css" rel="stylesheet">
+    <link href="../css/style.css" rel="stylesheet">
+
+    <title>Home</title>
+    <nav class="navbar navbar-expand-sm navbar-light bg-light">
+        <a href="Index.php" class="navbar-brand">Auction</a>
+        <button class="navbar-toggler" data-toggle="collapse" data-target="#navbarMenu">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarMenu">
+            <ul class="navbar-nav dropdown-menu-lg-left">
+                <li class="nav-item"></li>
+                <li class="nav-item">
+                    <a href="auction.php" class="nav-link">Catalogue</a>
+                </li>
+                <li class="nav-item">
+                    <a href="login.php" class="nav-link">Login</a>
+                </li>
+                <li class="nav-item">
+                    <a href="bidList.php" class="nav-link">Bid List</a>
+                </li>
+            </ul>
+            <form action="search.php" method="get">
+                <div class="bk">
+                    <input type="text" onKeyUp="fx(this.value)" autocomplete="off" name="qu" id="qu" class="textbox" placeholder="What are you looking for ?" tabindex="1">
+                    <button type="button" class="textbox-clr" id="textbox-clr" onClick="lightbg_clr()"></button>
+                    <button type="submit" class="query-submit" tabindex="2"><i class="fa fa-search" style="color:#16181b; font-size:20px"></i></button>
+                    <div id="livesearch"></div>
+                </div>
+            </form>
+            <h10> You are not logged in </h10>
+        </div>
+    </nav>
+    
+</head>
+
+
+
